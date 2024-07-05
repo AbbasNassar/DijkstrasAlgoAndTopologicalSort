@@ -1,0 +1,3 @@
+C:/Users/abbas/CLionProjects/Project4C/cmake-build-debug/CMakeFiles/Project4C.dir
+C:/Users/abbas/CLionProjects/Project4C/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/abbas/CLionProjects/Project4C/cmake-build-debug/CMakeFiles/rebuild_cache.dir

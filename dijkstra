@@ -1,0 +1,59 @@
+void dijkstra(graphPtr graph, char source[], char destination[]) {
+
+
+    int distance[maxNumOfBuildings];      //<-- will store the shortest distance from the source to every other building.
+    bool shortestPathReached[maxNumOfBuildings];   //<-- acting like bool array to hold 1(true) if the shortest path from the source to the i-th city has been finalized.
+    int parent[maxNumOfBuildings];  //<--  will store the immediate predecessor of a city in the shortest path from the source.
+    // will store the index that reflect the city in it:
+    int srcBuildingIndex = -1;
+    int destBuildingIndex = -1;
+    ptrToSrcBuilding srcTemp = graph->buildingsGraph->next;
+    ptrToDestBuilding destTemp = graph->buildingsGraph->destinationBuildingsList->next;
+    // check the cities the same as in the addPath function:
+    for (int i = 0; i < maxNumOfBuildings; i++) {
+        if (strcmp(srcTemp->buildingName, source) == 0) {
+            srcBuildingIndex = i;
+        }
+        if (strcmp(srcTemp->buildingName, destination) == 0) {
+            destBuildingIndex = i;
+        }
+        parent[i] = -1;
+        distance[i] = Inf;
+        shortestPathReached[i] = 0;
+        srcTemp = srcTemp->next;
+    }
+
+    if (srcBuildingIndex == -1){
+        printf("Source building not found\n");
+        return;
+    }
+    if (destBuildingIndex == -1){
+        printf("Destination building not found\n");
+        return;
+    }
+    // Source always stored at index zero.
+    distance[srcBuildingIndex] = 0;  //<--  distance from the source to itself is 0.
+
+    priorityQueue minHeap = create_pq(8);
+
+    ptrToSrcBuilding sourceNode = searchForSrcBuilding(graph->buildingsGraph, source);
+    while (sourceNode != NULL){
+        struct heapNode parentNode;
+        strcpy(parentNode.buildingName, sourceNode->buildingName);
+        parentNode.distance = 0;
+        parentNode.state = 1;
+        while (destTemp != NULL){
+            struct heapNode childNode;
+            strcpy(childNode.buildingName, destTemp->buildingName);
+            childNode.distance = destTemp->distance;
+            childNode.state = 1;
+            insertIntoHeap(childNode, minHeap);
+            destTemp = destTemp->next;
+        }
+        struct heapNode minNode = delete_min(minHeap);
+        parentNode.distance+=minNode.distance;
+        printf("%s ---> ", parentNode.buildingName);
+        if (strcmp(minNode.buildingName, destination)==0)
+            printf("%s with distance ", minNode.buildingName);
+        srcTemp = srcTemp->next;// Non Linear
+    }
