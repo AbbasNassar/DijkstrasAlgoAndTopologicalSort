@@ -61,8 +61,9 @@ struct graphCourses {
     queueNodePtr CoursesGraph[maxNumOfCourses];
 };
 ```
-##Functions
-###Graph and Queue Operations
+
+## Functions
+### Graph and Queue Operations
 * Queue Operations
 ```c
 queuePtr createCoursesQueue();
@@ -84,7 +85,7 @@ void loadBuildingsAndDistances(graphPtr graph);
 void insertBuildings(graphPtr graph, char insertedSrcBuilding[], char insertedDestBuilding[], int insertedDistance);
 ```
 
-##Algorithms
+## Algorithms
 * Shortest Path Calculation (Dijkstra's Algorithm)
 ```c
 void printPath(int parent[], int j, graphPtr graph) {// Recursive function to print the path, because the path is not linear.
@@ -233,7 +234,7 @@ void topologicalSort( coursesGraphPtr graph ) {
         printf("The loaded courses graph contains a cycle:(\n");
 }
 ```
-#Main Function
+# Main Function
 ```c
 int main() {
     coursesGraphPtr coursesGraph = createCoursesGraph();
@@ -293,12 +294,12 @@ int main() {
 }
 ```
 
-##Usage
+## Usage
 1- Load Data from Files: Load building distances and course dependencies.
 2- Calculate Shortest Distance: Find the shortest distance between two buildings using Dijkstra's algorithm.
 3- Print Shortest Route: Print the shortest route between two buildings along with the total distance.
 4- Topological Sort of Courses: Sort and print courses using topological sort to resolve dependencies.
 
-##Notes
+## Notes
 * Ensure the data files `../Courses.txt` and `../buildings.txt` are in place and formatted correctly.
 * The maximum number of buildings and courses are defined by `maxNumOfBuildings` and `maxNumOfCourses` respectively. Adjust these constants as needed.
